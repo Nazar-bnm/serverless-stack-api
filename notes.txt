@@ -1,2 +1,10 @@
 endpoints:
-- https://3giqyvnei5.execute-api.eu-central-1.amazonaws.com/prod/hello
+- https://3giqyvnei5.execute-api.my-zone.amazonaws.com/prod/hello
+
+
+*** RUN UNIT TESTS ***
+  $ serverless invoke local --function create --path mocks/create-event.json
+  * if you have multiple profiles for your AWS SDK credentials, you will need to explicitly pick one. Use the following command instead:
+  $ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/create-event.json
+  * Where myProfile is the name of the AWS profile you want to use.
+    If you need more info on how to work with AWS profiles in Serverless, refer to our Configure multiple AWS profiles chapter.

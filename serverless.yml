@@ -6,7 +6,7 @@ service: notes-api
 # Including all the other Lambda functions. This negatively affects performance as your app grows in size.
 # The larger your Lambda function packages, the longer the cold starts.
 package:
-  individually: true # Serverless Framework is packaging our functions individually, add the following to your
+  individually: true # Serverless Framework is packaging our functions individually, add the following to yourgit 
 
 plugins:
   - serverless-bundle # Package our functions with Webpack
@@ -19,10 +19,39 @@ provider:
   stage: prod
   region: eu-central-1
 
+  # These environment variables are made available to our functions
+  # under process.env.
+  environment:
+    tableName: notes
+
+  # 'iamRoleStatements' defines the permission policy for the Lambda function.
+  # In this case Lambda functions are granted with permissions to access DynamoDB.
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:eu-central-1:*:*"
+    
+
 functions:
-  hello:
-    handler: handler.hello
+#   hello:
+#     handler: handler.hello
+#     events:
+#       - http:
+#           path: hello
+#           method: get
+  # Defines an HTTP API endpoint that calls the main function in create.js
+  # - path: url path is /notes
+  # - method: POST request
+  create:
+    handler: create.main
     events:
       - http:
-          path: hello
-          method: get
+          path: notes
+          method: post

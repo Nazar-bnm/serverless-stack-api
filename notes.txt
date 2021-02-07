@@ -8,3 +8,8 @@ endpoints:
   $ AWS_PROFILE=myProfile serverless invoke local --function create --path mocks/create-event.json
   * Where myProfile is the name of the AWS profile you want to use.
     If you need more info on how to work with AWS profiles in Serverless, refer to our Configure multiple AWS profiles chapter.
+
+  serverless invoke local --function get --path mocks/get-event.json
+
+  serverless invoke local --function list --path mocks/list-event.json
+

@@ -1,6 +1,6 @@
 endpoints:
-- https://3giqyvnei5.execute-api.my-zone.amazonaws.com/prod/hello
-
+- https://my-id.execute-api.my-zone.amazonaws.com/prod/hello
+- https://my-id.execute-api.my-zone.amazonaws.com/prod/notes
 
 *** RUN UNIT TESTS ***
   $ serverless invoke local --function create --path mocks/create-event.json
@@ -16,4 +16,20 @@ endpoints:
   serverless invoke local --function update --path mocks/update-event.json
 
   serverless invoke local --function delete --path mocks/delete-event.json
-  
+
+*** DEPLOY API ***
+$ serverless deploy
+
+or 
+
+$ serverless deploy --aws-profile myProfile
+
+Configure Multiple AWS Profiles - https://serverless-stack.com/chapters/configure-multiple-aws-profiles.html
+---------
+check API data -> $ aws apigateway get-rest-apis
+
+deploy single function
+$ serverless deploy function -f list
+
+----
+

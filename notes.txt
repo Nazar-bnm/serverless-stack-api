@@ -33,3 +33,7 @@ $ serverless deploy function -f list
 
 ----
 
+*** USER POOL ***
+https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
+
+notes-user-pool

@@ -37,3 +37,11 @@ $ serverless deploy function -f list
 https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
 
 notes-user-pool
+
+This is telling Serverless Framework that our APIs are secured using an Identity Pool. Here is how it roughly works:
+
+1) A request with some signed authentication headers will be sent to our API.
+2) AWS will use the headers to figure out which Identity Pool is tied to it.
+3) The Identity Pool will ensure that the request is signed by somebody that has authenticated with our User Pool.
+4) If so, then it’ll assign the Auth IAM Role to this request.
+5) Finally, IAM will check to ensure that this role has access to our API.

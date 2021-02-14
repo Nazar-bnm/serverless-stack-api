@@ -8,14 +8,14 @@ export const main = handler(async (event, context) => {
     TableName: process.env.tableName,
     Item: {
       // The attributes of the item to be created
-      userId: "123", // The id of the author
+      userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
       noteId: uuid.v1(), // A unique uuid
       content: data.content, // Parsed from request body
       attachment: data.attachment, // Parsed from request body
       createdAt: Date.now(), // Current Unix timestamp
     },
   };
-
+  // Keep in mind that the userId above is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool
   await dynamoDb.put(params);
 
   return params.Item;

@@ -10,8 +10,9 @@ export const main = handler(async (event, context) => {
     KeyConditionExpression: "userId = :userId",
     // 'ExpressionAttributeValues' defines the value in the condition
     // - ':userId': defines 'userId' to be the id of the author
+    // Keep in mind that the userId below is the Federated Identity id (or Identity Pool user id). This is not the user id that is assigned in our User Pool
     ExpressionAttributeValues: {
-      ":userId": "123",
+      ":userId": event.requestContext.identity.cognitoIdentityId,
     },
   };
 
